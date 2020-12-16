@@ -18,8 +18,8 @@ export default{
 	
 	__api__getToDoList:function(params){
 		return new http({
-			url:'todolist',
-			method:'get',
+			url:'todolist/all',
+			method:'post',
 			data:params
 			
 		})

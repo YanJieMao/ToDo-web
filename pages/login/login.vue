@@ -46,14 +46,16 @@
 				username:this.username,
 				passwd:this.passwd
 			}).then((res)=>{
+				console.log("login")
 				console.log(res)
 				try{
 					uni.setStorageSync('user_id',res.id);
 					uni.setStorageSync('user_name',res.username);
 					uni.setStorageSync('user_token',res.token);
+		
 					uni.showToast({
 						title:"登录成功",
-						duration:1000
+						duration:3000
 						})
 						setTimeout(function(){
 						uni.switchTab({

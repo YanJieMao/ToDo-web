@@ -28,6 +28,7 @@ export function http(params){
 		    header: header,
 		    success: (res) => {
 		        console.log("发送网络请求成功结果："+JSON.stringify(res.data));
+				//console.log(res);
 				resolve(res.data);
 		        if(res.data.code==200||res.data.code==201){
 					console.log("请求成功");
