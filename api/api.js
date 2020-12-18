@@ -9,6 +9,13 @@ export default{
 			data:params    //请求参数
 		})
 	},
+	__api__register:function(params){
+		return new http({
+			url:'user',  //请求地址
+			method:'post', //请求方式
+			data:params    //请求参数
+		})
+	},
 	// 获取用户信息
 	/* __api__getUserInfo:function(params){
 		return new http({
@@ -24,6 +31,7 @@ export default{
 			
 		})
 	}
+	
 	
 	
 }

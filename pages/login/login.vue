@@ -10,7 +10,9 @@
 		</view>
 		<view class="cu-form-group">
 			<button @click="login">登录</button>
-			<button >注册</button>
+			
+			<button @click="register">注册</button>
+			
 		</view>
 	</view>
 </template>
@@ -41,6 +43,12 @@
 		}
 		},
 		methods: {
+		register:function(){
+			uni.navigateTo({
+				url:"../register/register"
+				
+			})
+		},
 		login:function(){
 			this.$api.__api__login({
 				username:this.username,
