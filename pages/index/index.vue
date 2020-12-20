@@ -14,45 +14,50 @@
 							</view>
 
 						</view>
-						
-							<view class="cu-capsule round padding">
-								<view class='cu-tag bg-blue '>
-									结束时间
-								</view>
-								<view class="cu-tag line-blue">
-									{{item.DeadLine}}
 
-								</view>
-								<view class="cu-tag bg-blue">
-									{{item.IsDone}}
-								
-								</view>
-								
+						<view class="cu-capsule round padding">
+							<view class='cu-tag bg-blue '>
+								结束时间
 							</view>
-							<!-- <view class="content ">
-						
-						<view class="text-gray  padding ">
-							 <text>结束时间 :</text>
-							<text class=" text-red text-right ">{{item.DeadLine}}</text>
-							
+							<view class="cu-tag line-blue">
+								{{item.DeadLine}}
+
+							</view>
+							<view class="cu-tag bg-blue">
+								{{item.IsDone}}
+
+							</view>
+
 						</view>
-					</view>
-				 -->
-							
-						
+
+
+
 					</view>
 
 
-					<!-- <view class="text-gray text-sm text-right padding">
-					<text class="cuIcon-attentionfill margin-lr-l"></text> 10
-					<text class="cuIcon-appreciatefill margin-lr-xs"></text> 20
-					<text class="cuIcon-messagefill margin-lr-xs"></text> 30
-				</view> -->
+
 
 
 				</view>
 			</view>
 		</view>
+		
+		<!-- 新增todo按钮 -->
+		<view>
+			<button class="cu-btn round lg icon add addc bg-gradual-green " @click="addtodo()" :style="{}">
+				<text class="cuIcon-add text-lg"></text>
+			</button>
+		
+		</view>
+
+		<!-- 返回顶部按钮 -->
+		<view>
+			<button class="cu-btn round lg icon top topc " @click="top" :style="{'display':(flag===true? 'block':'none')}">
+				<text class="cuIcon-top "></text>
+			</button>
+
+		</view>
+
 
 
 
@@ -65,6 +70,7 @@
 		data() {
 			return {
 				todolist: [],
+				flag:false
 			}
 		},
 		onLoad() {
@@ -72,6 +78,13 @@
 
 		},
 		methods: {
+			
+			addtodo:function(){
+				uni.navigateTo({
+					url:"./addtodo"
+					
+				})
+			},
 			init: function() { //初始化页面
 				var params
 				uni.getStorage({
@@ -96,29 +109,29 @@
 
 
 			},
-			getData: function() {
-				uni.request({
-					url: 'http://172.27.139.125:8080/v1/todolist/all', //仅为示例，并非真实接口地址。
-					method: 'POST',
-					data: {
-						"UID": 2,
-						"List": "一二三四五"
+	// 		getData: function() {
+	// 			uni.request({
+	// 				url: 'http://172.27.139.125:8080/v1/todolist/all', //仅为示例，并非真实接口地址。
+	// 				method: 'POST',
+	// 				data: {
+	// 					"UID": 2,
+	// 					"List": "一二三四五"
 
-					},
-					header: {},
-					success: (res) => {
-						console.log('get成功');
-						console.log(res);
-					},
-					fail: (res) => {
-						console.log('get失败');
-						console.log(res.data);
-					}
-				});
-			}
+	// 				},
+	// 				header: {},
+	// 				success: (res) => {
+	// 					console.log('get成功');
+	// 					console.log(res);
+	// 				},
+	// 				fail: (res) => {
+	// 					console.log('get失败');
+	// 					console.log(res.data);
+	// 				}
+	// 			});
+	// 		}
 
-		},
-	}
+	   },
+	 }
 </script>
 
 <style>
@@ -134,5 +147,32 @@
 	.title {
 		font-size: 36rpx;
 		color: #8f8f94;
+	}
+	
+	/* 回到顶部 */
+	.top {
+		position: relative;
+		display: none;
+	}
+	
+	.topc {
+		position: fixed;
+		right: 0;
+		background: #ff5c7c;
+		top: 80%;
+		height: 50px;
+		line-height: 50px;
+	}
+	.add {
+		position: relative;
+		
+	}
+	.addc {
+		position: fixed;
+		right: 0;
+		background: #8F8F94;
+		top: 80%;
+		height: 50px;
+		line-height: 50px;
 	}
 </style>

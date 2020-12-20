@@ -1,9 +1,11 @@
 <template>
 	<view>
+		
 		<form>
 			<view class="cu-form-group margin-top">
 				<view class="title">用户名：</view>
-				<input placeholder="" name="username" v-model="username"></input>
+				
+				<input name="username" v-model="username"></input>
 			</view>
 			<view class="cu-form-group">
 				<view class="title">密码：</view>
@@ -14,7 +16,7 @@
 				<input placeholder="" name="age" v-model="age"></input>
 			</view>
 			<view class="cu-form-group">
-				<view class="title">兴趣爱好</view>
+				<view class="title">性别</view>
 				<input placeholder="" name="gender" v-model="gender"></input>	
 			</view>
 			<view class="padding flex flex-direction">
@@ -25,6 +27,7 @@
 			
 			
 		</form>
+		
 	</view>
 </template>
 
@@ -32,14 +35,51 @@
 	export default {
 		data() {
 			return {
+				user :[],
 				username:"",
 				passwd:"",
 				age:"",
-				gender:""
+				gender:"",
+				
 				
 			}
 		},
+		onLoad() {
+			this.getUser();
+		
+		},
 		methods: {
+			
+			getUser:function(){
+				this.$api.__api__getUser()
+				
+				var params
+				uni.getStorage({
+					key: 'user_id',
+					success: function(res) {
+						params = {
+							ID: res.data
+						}
+						console.log(params)
+						console.log("缓存中获取user_id：" + res.data);
+					}
+				
+				});
+				this.$api.__api__getUser(params)
+					.then((res) => {
+						console.log("getUser");
+						console.log(res);
+						console.log(res[0].id);
+						
+						this.username = res[0].username;
+						this.passwd = res[0].passwd;
+						this.age = res[0].age;
+						this.gender = res[0].gender
+						console.log(this.username);
+					})
+				
+				
+			},
 			submit:function(){
 				this.$api.__api__register({
 					username:this.username,

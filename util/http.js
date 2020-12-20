@@ -1,4 +1,4 @@
-const BASE_URL="http://172.27.139.125:8080/v1/";
+const BASE_URL="http://localhost:8082/v1/";
 //使用Promise写一个通用的网络请求方式，包括错误的处理和结果的返回。
 export function http(params){
 	return new Promise((resolve,reject)=>{

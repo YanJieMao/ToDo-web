@@ -17,11 +17,15 @@ export default{
 		})
 	},
 	// 获取用户信息
-	/* __api__getUserInfo:function(params){
+	__api__getUser:function(params){
 		return new http({
-			url:'customer/'+params.id,
+			url:'user',
+			method:'get',
+			data:params
 		});
-	}, */
+	},
+	
+	
 	
 	__api__getToDoList:function(params){
 		return new http({

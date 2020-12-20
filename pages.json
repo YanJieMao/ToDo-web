@@ -36,6 +36,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/index/addtodo",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
         
 	"globalStyle": {
