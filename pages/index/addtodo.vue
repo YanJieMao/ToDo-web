@@ -5,11 +5,11 @@
 			<view class="cu-form-group margin-top">
 				<view class="title">待办：</view>
 				
-				<input name="username" v-model="username"></input>
+				<input name="List" v-model="List"></input>
 			</view>
 			<view class="cu-form-group">
 				<view class="title">deadline：</view>
-				<input placeholder="" name="passwd" v-model="passwd"></input>
+				<input placeholder="" name="Deadline" v-model="Deadline"></input>
 			</view>
 			
 			<view class="padding flex flex-direction">
@@ -28,57 +28,54 @@
 	export default {
 		data() {
 			return {
-				user :[],
-				username:"",
-				passwd:"",
-				age:"",
-				gender:"",
-				
+				List:"",
+				Deadline:"",
+				UID:""
 				
 			}
 		},
 		onLoad() {
-			this.getUser();
+			//this.getUserID();
 		
 		},
 		methods: {
 			
-			getUser:function(){
-				this.$api.__api__getUser()
+			getUserID:function(){
 				
-				var params
+				
+				var uid
 				uni.getStorage({
 					key: 'user_id',
 					success: function(res) {
-						params = {
-							ID: res.data
-						}
-						console.log(params)
+						uid = res.data
+						console.log(uid)
 						console.log("缓存中获取user_id：" + res.data);
 					}
 				
 				});
-				this.$api.__api__getUser(params)
-					.then((res) => {
-						console.log("getUser");
-						console.log(res);
-						console.log(res[0].id);
-						
-						this.username = res[0].username;
-						this.passwd = res[0].passwd;
-						this.age = res[0].age;
-						this.gender = res[0].gender
-						console.log(this.username);
-					})
+				
 				
 				
 			},
 			submit:function(){
-				this.$api.__api__register({
-					username:this.username,
-					passwd:this.passwd,
-					age:this.age,
-					gender:this.gender
+				var uid
+				uni.getStorage({
+					key: 'user_id',
+					success: function(res) {
+						UID = this.UID.concat(res.data)
+						console.log(UID)
+						console.log("缓存中获取user_id：" + res.data);
+					}
+				
+				});
+				
+				
+				this.$api.__api__addToDo({
+					UID:1,
+					List:this.List,
+					Deadline:this.Deadline,
+					
+					
 				}).then((res)=>{
 					console.log("addtodo")
 					console.log(res)

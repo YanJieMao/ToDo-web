@@ -36,6 +36,7 @@
 		data() {
 			return {
 				user :[],
+				id:"",
 				username:"",
 				passwd:"",
 				age:"",
@@ -46,6 +47,7 @@
 		},
 		onLoad() {
 			this.getUser();
+			
 		
 		},
 		methods: {
@@ -56,12 +58,14 @@
 				var params
 				uni.getStorage({
 					key: 'user_id',
+					
 					success: function(res) {
 						params = {
-							ID: res.data
+							ID: res.data,
+							
 						}
 						console.log(params)
-						console.log("缓存中获取user_id：" + res.data);
+						console.log("缓存中获取user：" + res.data);
 					}
 				
 				});
@@ -81,13 +85,24 @@
 				
 			},
 			submit:function(){
-				this.$api.__api__register({
+				var id
+				uni.getStorage({
+					key: 'user_id',
+					success: function(res) {
+						id = res.data
+						console.log(params)
+						console.log("缓存中获取user_id：" + res.data);
+					}
+				
+				});
+				this.$api.__api__updateUser({
+					id:id,
 					username:this.username,
 					passwd:this.passwd,
 					age:this.age,
 					gender:this.gender
 				}).then((res)=>{
-					console.log("register")
+					console.log("updateUser")
 					console.log(res)
 					uni.showToast({
 						title:"修改成功",

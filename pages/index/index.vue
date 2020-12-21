@@ -20,7 +20,11 @@
 								结束时间
 							</view>
 							<view class="cu-tag line-blue">
+								<uni-dateformat date=""></uni-dateformat>
+
 								{{item.DeadLine}}
+								
+								
 
 							</view>
 							<view class="cu-tag bg-blue">
@@ -71,6 +75,7 @@
 			return {
 				todolist: [],
 				flag:false
+				
 			}
 		},
 		onLoad() {
@@ -85,6 +90,16 @@
 					
 				})
 			},
+			filters:function(){
+						//过滤器 用于格式化时间
+						/* formatData(data){
+							const nDate=new Date(data)
+							const year= nDate.getFullYear()
+							const month=nDate.getMonth().toString().padStart(2,0)
+							const day=nDate.getDay().toString().padStart(2,0)
+							return year+'-'+month+'-'+day
+						} */
+					},
 			init: function() { //初始化页面
 				var params
 				uni.getStorage({
